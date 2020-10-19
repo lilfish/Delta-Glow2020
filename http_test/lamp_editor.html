@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // when life is settled, load up the fun stuff
+        document.addEventListener('DOMContentLoaded', function () {
+            new Vue({
+                el: '#app',
+                data: {
+                    info: null,
+                    myTimer: null,
+                    infoTimer: null,
+                    bols: 5,
+                    rgba: "0,0,0,0",
+                    r: 0,
+                    r_dim: 0,
+                    g: 0,
+                    g_dim: 0,
+                    b: 0,
+                    b_dim: 0,
+                    ww: 0,
+                    ww_dim: 0,
+                    kw: 0,
+                    kw_dim: 0,
+                    lamp: [
+                        {
+                            id: 0,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 1,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 2,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 3,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 4,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 5,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 6,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 7,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 8,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 9,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 10,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 11,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 12,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 13,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 14,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 15,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 16,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 17,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 18,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 19,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 20,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 21,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 22,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 23,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 24,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 25,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 26,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 27,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 28,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 29,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 30,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 31,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 32,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 33,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 34,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 35,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 36,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }, {
+                            id: 37,
+                            value: [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ],
+                            color: [
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                                [0,0,0,1],
+                            ]
+                        }
+                    ],
+                },
+                mounted() {
+                    this.sendUpdate();
+                },
+                computed: {
+                    computedInfo: function () {
+                        return this.info;
+                    },
+                    rgbas: function() {
+                        var rgbas = [
+                            [this.r,    0,  0,  1-0.8/16*this.r_dim],
+                            [0, this.g, 0,  1-0.8/16*this.g_dim],
+                            [0, 0,  this.b, 1-0.8/16*this.b_dim],
+                            [this.ww,   this.ww/100*80, 0+(this.ww/3),   1-0.8/16*this.ww_dim],
+                            [0+(this.kw/3), 0+(this.kw/2),   this.kw,   1-0.8/16*this.kw_dim]
+                            ]
+                        return rgbas
+                    },
+                    realColor: function(){
+                        var colors = [
+                            this.r_dim, this.r, this.g_dim, this.g, this.b_dim, this.b, this.ww_dim, this.ww, this.kw_dim, this.kw
+                        ]
+                        return colors;
+                    },
+                    jsonObject: function(){
+                        var all_vals = [];
+                        var fake_led = [0,0,0,0,0,0,0,0,0,0];
+                        // fill all values in a single array
+                        this.lamp.forEach(led => {
+                            all_vals = all_vals.concat(led.value);
+                        });
+                        // add 3 more fake leds
+                        for (let y = 0; y < 3; y++) {
+                            all_vals = all_vals.concat(fake_led);
+                        }
+                        return all_vals;
+                    }
+                },
+                methods: {
+                    mouseOver: function (lamp) {
+                        if (event.buttons) {
+                            this.lamp[lamp].color = this.rgbas;
+                            this.lamp[lamp].value = this.realColor;
+                            clearTimeout(this.myTimer);
+                            this.myTimer = setTimeout(() => {
+                                this.sendUpdate()
+                            }, 200);
+                        }
+                    },
+                    mouseClick: function (lamp) {
+                        this.lamp[lamp].color = this.rgbas;
+                        this.lamp[lamp].value = this.realColor;
+                        clearTimeout(this.myTimer);
+                        this.myTimer = setTimeout(() => {
+                            this.sendUpdate()
+                        }, 200);
+                    },
+                    updateInfo: function (text) {
+                        this.info = null;
+                        this.info = text;
+                        clearTimeout(this.infoTimer);
+                        this.infoTimer = setTimeout(() => {
+                            this.info = null
+                        }, 1000);
+                    },
+                    sendUpdate: async function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == XMLHttpRequest.DONE) {
+                                if (xhr.status == 200) {
+                                    this.updateInfo("Response was 200, updated");
+                                } else {
+                                    this.updateInfo("Response was not 200, error?");
+                                }
+                            }
+                        }.bind(this);
+                        xhr.open("POST", 'http://127.0.0.1:8080', true);
+                        xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
+                        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+                        xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+                        xhr.send(JSON.stringify(this.jsonObject));
+                        this.updateInfo("Sending update...");
+                    }
+                }
+            })
+        })
+    </script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            width: 100vw;
+            height: 100vh!important;
+            overflow: hidden;
+        }
+
+        #app {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: rgba(211, 211, 211, 0.493);
+            margin: 0;
+            padding: 0;
+        }
+
+        #parent {
+            position: absolute;
+            border-radius: 50%;
+            transform: rotate(0deg);
+            transition: transform 0.7s linear;
+        }
+
+        .border {
+            border: 1px solid rgba(0, 0, 0, 1);
+        }
+
+        .circle {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            top: 0;
+            bottom: 0;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .parent_one {
+            width: 220px;
+            height: 220px;
+        }
+
+        .circle_one {
+            width: 220px;
+            height: 220px;
+        }
+
+        .parent_two {
+            width: 450px;
+            height: 450px;
+        }
+
+        .circle_two {
+            width: 450px;
+            height: 450px;
+        }
+
+        .parent_three {
+            width: 625px;
+            height: 625px;
+        }
+
+        .circle_three {
+            width: 625px;
+            height: 625px;
+        }
+
+        #child {
+            position: absolute;
+            border: 1px solid rgba(0, 0, 0, 1);
+            width: 80px;
+            height: 80px;
+            transform: rotate(0deg);
+            transition: transform 0.7s linear;
+            top: -40px;
+            left: 110px;
+            border-radius: 50%;
+            z-index: 100000;
+        }
+        .outer_lamp{
+            position: absolute;
+            
+            /* top: 40px; */
+            /* left: 40px; */
+            width: 60px;
+            height: 60px;
+            top: 10px;
+            left: 10px;
+            z-index: 100000;
+        }
+        .inner_lamps{
+            border: 1px solid rgba(0, 0, 0, 1);
+            width: 20px!important;
+            height: 20px!important;
+            transform: rotate(0deg);
+            border-radius: 50%;
+            transition: transform 0.7s linear;
+        }
+
+        .menu {
+            max-width: 350px;
+            min-height: 400px;
+            background-color: gray;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 20px;
+        }
+
+        .slider {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .slider-label {
+            width: 75px;
+        }
+        .slider-second-label {
+            width: 50px;
+            margin-left: 20px;
+        }
+
+        .slider-input {
+            flex: 1;
+        }
+
+        .color_container{
+            position: relative;
+            text-align: center;
+        }
+        .color_preview {
+            margin-top: 20px;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 1);
+            border: 1px solid rgba(0, 0, 0, 1);
+            transform: rotate(0deg);
+            transition: transform 0.7s linear;
+            border-radius: 50%;
+            z-index: 100000;
+            /* position: absolute; */
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+        .rgba_preview{
+            width: 80px;
+            height: 80px;
+            margin-top: 20px;
+            margin-left: 25px;
+            display: inline-block;
+        }
+
+        .index {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .5s;
+        }
+
+        .fade-enter,
+        .fade-leave-to
+
+        /* .fade-leave-active below version 2.1.8 */
+            {
+            opacity: 0;
+        }
+        #outer{
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            top: 0;
+            bottom: 0;
+            margin-top: auto;
+            margin-bottom: auto;
+            transform: rotate(110deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="outer">
+            <div class="circle circle_three">
+                <div v-for="(item,index) in lamp" :key="item.id">
+                    <div v-if="index < 18" :class="index == 1 ? 'border' : ''" class="parent_three" id="parent"
+                        :style="'transform: rotate('+360/18*index+'deg);'">
+                        <span class="index" unselectable="on">{{ item.id }}</span>
+
+                        <span  id="child" @click="mouseClick(item.id)"
+                            @mouseover="mouseOver(item.id)">
+                            <span v-for="(lamp, index) in bols" :key="index" class="outer_lamp" :style="'transform: rotate('+360/5*(index-18)+'deg);'">
+                                <div class="inner_lamps" :style="'background-color: rgba( '+item.color[index]+')'"></div>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="circle circle_two">
+                <div v-for="(item,index) in lamp" :key="item.id">
+                    <div v-if="index >= 18 && index < 30" :class="index == 18 ? 'border' : ''" class="parent_two"
+                        id="parent" :style="'transform: rotate('+360/12*(index-18)+'deg);'">
+                        <span class="index" unselectable="on">{{ item.id }}</span>
+                        
+                        <span  id="child" @click="mouseClick(item.id)"
+                            @mouseover="mouseOver(item.id)">
+                            <span v-for="(lamp, index) in bols" :key="index" class="outer_lamp" :style="'transform: rotate('+360/5*(index-18)+'deg);'">
+                                <div class="inner_lamps" :style="'background-color: rgba( '+item.color[index]+')'"></div>
+                            </span>
+                         
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="circle circle_one">
+                <div v-for="(item,index) in lamp" :key="item.id">
+                    <div v-if="index >= 30" :class="index == 30 ? 'border' : ''" class="parent_one" id="parent"
+                        :style="'transform: rotate('+360/8*(index-30)+'deg);'">
+                        <span class="index" unselectable="on">{{ item.id }}</span>
+                        <span  id="child" @click="mouseClick(item.id)"
+                            @mouseover="mouseOver(item.id)">
+                            <span v-for="(lamp, index) in bols" :key="index" class="outer_lamp" :style="'transform: rotate('+360/5*(index-18)+'deg);'">
+                                <div class="inner_lamps" :style="'background-color: rgba( '+item.color[index]+')'"></div>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="slider">
+                <span class="slider-label">R</span>
+                <input id="slider" v-model="r" class="slider-input" type="range" min="0" max="255" value="0">
+                <span class="slider-second-label">{{ r }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">R_dim</span>
+                <input id="slider" v-model="r_dim" class="slider-input" type="range" min="0" max="16" value="0">
+                <span class="slider-second-label">{{ r_dim }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">G</span>
+                <input id="slider" v-model="g" class="slider-input" type="range" min="0" max="255" value="0">
+                <span class="slider-second-label">{{ g }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">G_dim</span>
+                <input id="slider" v-model="g_dim" class="slider-input" type="range" min="0" max="16" value="0">
+                <span class="slider-second-label">{{ g_dim }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">B</span>
+                <input id="slider" v-model="b" class="slider-input" type="range" min="0" max="255" value="0">
+                <span class="slider-second-label">{{ b }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">B_dim</span>
+                <input id="slider" v-model="b_dim" class="slider-input" type="range" min="0" max="16" value="0">
+                <span class="slider-second-label">{{ b_dim }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">WW</span>
+                <input id="slider" v-model="ww" class="slider-input" type="range" min="0" max="255" value="0">
+                <span class="slider-second-label">{{ ww }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">WW_dim</span>
+                <input id="slider" v-model="ww_dim" class="slider-input" type="range" min="0" max="16" value="0">
+                <span class="slider-second-label">{{ ww_dim }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">KW</span>
+                <input id="slider" v-model="kw" class="slider-input" type="range" min="0" max="255" value="0">
+                <span class="slider-second-label">{{ kw }}</span>
+            </div>
+            <div class="slider">
+                <span class="slider-label">KW_dim</span>
+                <input id="slider" v-model="kw_dim" class="slider-input" type="range" min="0" max="16" value="0">
+                <span class="slider-second-label">{{ kw_dim }}</span>
+            </div>
+            <br>
+            <div class="color_container">
+                <div class="color_preview">
+                    <span v-for="(lamp, index) in bols" :key="index" class="outer_lamp" :style="'transform: rotate('+360/5*(index-18)+'deg);'">
+                        <div class="inner_lamps" :style="'background-color: rgba( '+rgbas[index]+')'"></div>
+                    </span>
+                </div>
+                <div class="rgba_preview" :style="'background-color: rgba('+r+','+g+','+b+',1)'">
+                </div>
+            </div>
+        </div>
+        <transition name="fade">
+            <div class="info" v-if="info">
+                {{  computedInfo }}
+            </div>
+        </transition>
+    </div>
+</body>
+
+</html>

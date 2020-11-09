@@ -1,4 +1,5 @@
 from .Light import Light
+import re
 
 # This represents the big lamp
 class Lamp:
@@ -14,6 +15,7 @@ class Lamp:
     def __iter__(self):
         return self.lights
     
+    # Return all data in a readable format
     def __str__(self):
         result = ""
         for light in self.lights:
@@ -32,7 +34,7 @@ class Lamp:
         if type(new_light) is Light:
             self.lights[new_light.id] = new_light
         else:
-            raise ArgumentException("Argument must be of type Light")
+            raise Exception("Argument must be of type Light")
     
     # Clear a single light
     def clear_light(self, id):
@@ -47,4 +49,25 @@ class Lamp:
         byte_array = []
         for light in self.lights:
             byte_array = byte_array + light.build_byte_array()
-        return byte_array
+        return bytearray(byte_array)
+
+    @property
+    def ip(self):
+        return self._ip
+
+    @ip.setter
+    def ip(self,val):
+        if not re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",val): 
+            raise Exception("Ip is invalid")
+        self._ip = val
+    
+    @property
+    def port(self):
+        return self._port
+
+    @port.setter
+    def port(self,val):
+        if val < 0 or val > 65535: 
+            raise Exception("Port is invalid")
+        self._port = val
+    

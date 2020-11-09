@@ -3,6 +3,7 @@ class Led:
         self.dim = dim
         self.color = color
 
+    # 
     def __repr__(self):
         return str([self.dim, self.color])
     

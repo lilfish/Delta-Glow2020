@@ -1,7 +1,7 @@
 from lamp import Lamp as library
 
 def main():
-    lamp = library.Lamp(0, '192.168.4.204', '4210')
+    lamp = library.Lamp(0, '192.168.4.204', 4210)
 
     # Print the entire data structure (usefull for debugging)
     # print(lamp)
@@ -22,8 +22,7 @@ def main():
     # Get a single light
     single_light = lamp.get_light(5)
     # Update the light
-    single_light.red.dim = 16
-    single_light.red.color = 55
+    single_light.set_with_array([5,20,16,55,5,25,0,0,0,0])
     print(single_light)
     
     lamp.update_light(single_light)

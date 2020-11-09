@@ -21,6 +21,8 @@ class Light:
             )
         return result
 
+
+    # Set all the lamps with 1 array
     def set_with_array(self, array):
         if not len(array)== 10: raise Exception("set_with_array takes an array of 10 numbers")
         self.red.dim = array[0]

@@ -21,6 +21,19 @@ class Light:
             )
         return result
 
+    def set_with_array(self, array):
+        if not len(array)== 10: raise Exception("set_with_array takes an array of 10 numbers")
+        self.red.dim = array[0]
+        self.red.color = array[1]
+        self.green.dim = array[2]
+        self.green.color = array[3]
+        self.blue.dim = array[4]
+        self.blue.color = array[5]
+        self.warm_white.dim = array[6]
+        self.warm_white.color = array[7]
+        self.cold_white.dim = array[8]
+        self.cold_white.color = array[9]
+
     def build_byte_array(self):
         return (
             self.red.build_byte_array() + 

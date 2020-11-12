@@ -4,6 +4,14 @@ import re
 
 """This class represents a lampController which controls 36 lights"""
 
+lamp_grid = [[0, 0, 0, 1, 2, 3, 0, 0, 0],
+             [0, 0, 4, 5, 6, 7, 8, 0, 0],
+             [0, 9, 10, 11, 12, 13, 14, 15, 0],
+             [16, 17, 18, 19, 0, 20, 21, 22, 23],
+             [0, 24, 25, 26, 27, 28, 29, 30, 0],
+             [0, 0, 31, 32, 33, 34, 35, 0, 0],
+             [0, 0, 0, 36, 37, 38, 0, 0, 0]]
+
 
 class Lamp:
     def __init__(self, lamp_id, ip, port):
@@ -12,6 +20,7 @@ class Lamp:
         self.port = port
         # This represents all the small lights in the big lampController, there are
         self.lights = [Light(light_id) for light_id in range(38)]
+        self.grid = lamp_grid
 
     # This is called when you try to iterate over the lampController
     def __iter__(self):
@@ -25,9 +34,11 @@ class Lamp:
         return result
 
     # Find a single light
-    def get_light(self, id):
-        light = self.lights[id]
-        if not light: raise Exception("Light not found")
+    def get_light(self, light_id):
+        light = self.lights[light_id]
+        if not light:
+            raise Exception("Light not found")
+
         return light
 
     # Save a light
@@ -38,12 +49,12 @@ class Lamp:
             raise Exception("Argument must be of type Light")
 
     # Clear a single light
-    def clear_light(self, id):
-        self.lights[id] = Light(id)
+    def clear_light(self, light_id):
+        self.lights[light_id] = Light(light_id)
 
     # Clear all lights
-    def clear_lights(self):
-        self.lights = [Light(id) for id in range(38)]
+    def clear_all_lights(self):
+        self.lights = [Light(light_id) for light_id in range(38)]
 
     # This is called when you try to get a string
     def build_byte_array(self):

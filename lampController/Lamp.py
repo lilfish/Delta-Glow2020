@@ -1,27 +1,29 @@
 from .Light import Light
 import re
 
-# This represents the big lamp
+
+"""This class represents a lampController which controls 36 lights"""
+
+
 class Lamp:
-    def __init__(self,id, ip, port):
+    def __init__(self, id, ip, port):
         self.id = id
         self.ip = ip
         self.port = port
 
-        # This represents all the small lights in the big lamp, there are 
+        # This represents all the small lights in the big lampController, there are
         self.lights = [Light(id) for id in range(38)]
 
-    # This is called when you try to iterate over the lamp
+    # This is called when you try to iterate over the lampController
     def __iter__(self):
         return self.lights
-    
+
     # Return all data in a readable format
     def __str__(self):
         result = ""
         for light in self.lights:
             result = result + str(light)
         return result
-
 
     # Find a single light
     def get_light(self, id):
@@ -35,7 +37,7 @@ class Lamp:
             self.lights[new_light.id] = new_light
         else:
             raise Exception("Argument must be of type Light")
-    
+
     # Clear a single light
     def clear_light(self, id):
         self.lights[id] = Light(id)
@@ -56,18 +58,17 @@ class Lamp:
         return self._ip
 
     @ip.setter
-    def ip(self,val):
-        if not re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",val): 
+    def ip(self, val):
+        if not re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", val):
             raise Exception("Ip is invalid")
         self._ip = val
-    
+
     @property
     def port(self):
         return self._port
 
     @port.setter
-    def port(self,val):
-        if val < 0 or val > 65535: 
+    def port(self, val):
+        if val < 0 or val > 65535:
             raise Exception("Port is invalid")
         self._port = val
-    

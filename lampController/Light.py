@@ -1,5 +1,6 @@
 from .Led import Led
 
+
 class Light:
     def __init__(self, id):
         self.id = id
@@ -18,13 +19,12 @@ class Light:
             f'warm_white: {str(self.warm_white)} \n' +
             f'cold_white: {str(self.cold_white)} \n' +
             '================== \n'
-            )
+        )
         return result
-
 
     # Set all the lamps with 1 array
     def set_with_array(self, array):
-        if not len(array)== 10: raise Exception("set_with_array takes an array of 10 numbers")
+        if not len(array) == 10: raise Exception("set_with_array takes an array of 10 numbers")
         self.red.dim = array[0]
         self.red.color = array[1]
         self.green.dim = array[2]
@@ -38,9 +38,9 @@ class Light:
 
     def build_byte_array(self):
         return (
-            self.red.build_byte_array() + 
-            self.green.build_byte_array() + 
-            self.blue.build_byte_array() + 
-            self.warm_white.build_byte_array() + 
-            self.cold_white.build_byte_array()
+                self.red.build_byte_array() +
+                self.green.build_byte_array() +
+                self.blue.build_byte_array() +
+                self.warm_white.build_byte_array() +
+                self.cold_white.build_byte_array()
         )

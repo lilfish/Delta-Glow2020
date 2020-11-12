@@ -1,1 +1,12 @@
 __pycache__
+.idea
+venv
+
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../../../:\Users\walte\Documents\aa_github\Delta\delta-lights\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

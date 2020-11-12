@@ -8,6 +8,9 @@ class LampController:
         self.lamps = []
         self.grid = [[]]
         self.lamp_grid_size = [6, 6]
+        # Initialize socket connection
+        self.socket(socket.AF_INET,
+                    socket.SOCK_DGRAM)
 
     def __str__(self):
         result = ""
@@ -35,3 +38,7 @@ class LampController:
 
     def set_cell(self, coordinates, value):
         self.grid[coordinates] = value
+
+    def update_lamps(self):
+        for lamp in self.lamps:
+            self.socket.sendto(lamp.build_byte_array(), (lamp.ip, lamp.port))

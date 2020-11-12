@@ -6,13 +6,12 @@ import re
 
 
 class Lamp:
-    def __init__(self, id, ip, port):
-        self.id = id
+    def __init__(self, lamp_id, ip, port):
+        self.id = lamp_id
         self.ip = ip
         self.port = port
-
         # This represents all the small lights in the big lampController, there are
-        self.lights = [Light(id) for id in range(38)]
+        self.lights = [Light(light_id) for light_id in range(38)]
 
     # This is called when you try to iterate over the lampController
     def __iter__(self):

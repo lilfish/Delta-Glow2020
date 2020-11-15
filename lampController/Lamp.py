@@ -1,30 +1,34 @@
 from .Light import Light
+from .Errors import OutOfBoundsError
+import math
 import re
+import copy
 
-
-"""This class represents a lampController which controls 36 lights"""
-
-lamp_grid = [[0, 0, 0, 1, 2, 3, 0, 0, 0],
-             [0, 0, 4, 5, 6, 7, 8, 0, 0],
-             [0, 9, 10, 11, 12, 13, 14, 15, 0],
-             [16, 17, 18, 19, 0, 20, 21, 22, 23],
-             [0, 24, 25, 26, 27, 28, 29, 30, 0],
-             [0, 0, 31, 32, 33, 34, 35, 0, 0],
-             [0, 0, 0, 36, 37, 38, 0, 0, 0]]
+"""This class represents a lampController which controls 38 lights"""
+lamp_grid = [[-1, -1, -1, 15, 0, 1, -1, -1, -1],
+             [-1, -1, 14, 27, 16, 17, 2, -1, -1],
+             [-1, 13, 26, 35, 28, 29, 18, 3, -1],
+             [12, 25, 34, 37, -1, 38, 30, 19, 4],
+             [-1, 11, 24, 33, 32, 31, 20, 5, -1],
+             [-1, -1, 10, 23, 22, 21, 6, -1, -1],
+             [-1, -1, -1, 9, 8, 7, -1, -1, -1]]
 
 
 class Lamp:
-    def __init__(self, lamp_id, ip, port):
+    def __init__(self, lamp_id, x, y, radius, ip, port):
         self.id = lamp_id
+        self.x = x
+        self.y = y
+        self.radius = radius
         self.ip = ip
         self.port = port
         # This represents all the small lights in the big lampController, there are
-        self.lights = [Light(light_id) for light_id in range(38)]
+        self.lights = [Light(light_id) for light_id in range(0, 38)]
         self.grid = lamp_grid
 
     # This is called when you try to iterate over the lampController
     def __iter__(self):
-        return self.lights
+        return iter(self.lights)
 
     # Return all data in a readable format
     def __str__(self):
@@ -42,9 +46,19 @@ class Lamp:
         return light
 
     # Save a light
-    def update_light(self, new_light):
+    def update_light(self, x, y, new_light):
         if type(new_light) is Light:
-            self.lights[new_light.id] = new_light
+            light_id = self.__convert_coordinates_to_light_id(x, y)
+            print(f"REPLACING {light_id}")
+            for i, light in enumerate(self.lights):
+                if light.id == light_id:
+                    new_light.id = light_id
+                    self.lights[light_id] = copy.copy(new_light)
+                    break
+            result = []
+            for light in self.lights:
+                result.append(light.id)
+            print(result)
         else:
             raise Exception("Argument must be of type Light")
 
@@ -54,7 +68,7 @@ class Lamp:
 
     # Clear all lights
     def clear_all_lights(self):
-        self.lights = [Light(light_id) for light_id in range(38)]
+        self.lights = [Light(light_id) for light_id in range(39)]
 
     # This is called when you try to get a string
     def build_byte_array(self):
@@ -62,6 +76,35 @@ class Lamp:
         for light in self.lights:
             byte_array = byte_array + light.build_byte_array()
         return bytearray(byte_array)
+
+    # Checks if the given coordinate is inside this lamps area.
+    def is_inside(self, x, y):
+        if math.pow(self.x - x, 2) + math.pow(self.y - y, 2) <= math.pow(self.radius, 2):
+            return True
+        else:
+            return False
+
+    # Converts the x, y of the grid to a light id
+    def __convert_coordinates_to_light_id(self, x, y):
+        if x == 0 and y == 0:
+            raise OutOfBoundsError
+        x_in_circle = round(x - self.x)
+        y_in_circle = round(y - self.y)
+        light_id = lamp_grid[self.radius-y_in_circle][self.radius+1+x_in_circle]
+
+        if light_id != -1:
+            return light_id
+        else:
+            # Get light closest to the coordinate
+            # C is the point we want, we can calculate with this formula
+            # A is the base of the circle
+            # B is the coordinate in the grid
+            # r is the radius of the circle
+            # Cx = Ax + r((Bx - Ax) / √((Bx−Ax)^2+(By−Ay)^2))
+            # Cy = Ay + r((By - Ay) / √((Bx−Ax)^2+(By−Ay)^2))
+            closest_point_x = self.x + self.radius * ((x - self.x) / math.sqrt((x-self.x)**2 + (y - self.y)**2))
+            closest_point_y = self.y + self.radius * ((y - self.y) / math.sqrt((x - self.x) ** 2 + (y - self.y) ** 2))
+            return self.__convert_coordinates_to_light_id(math.floor(closest_point_x), math.floor(closest_point_y))
 
     @property
     def ip(self):

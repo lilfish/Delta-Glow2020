@@ -17,7 +17,7 @@ class Led:
         return self._dim
 
     @dim.setter
-    def dim(self,val):
+    def dim(self, val):
         if val < 0 or val > 16: 
             raise Exception("Dim needs to be in rage 0-16")
         self._dim = val

@@ -1,40 +1,42 @@
 import socket
 from .Lamp import Lamp
+from .Errors import OutOfBoundsError
 
 
 # This class is responsible for 'clustering' the lamps and sending the data to the lamps
 class LampController:
     def __init__(self):
         self.lamps = []
-        self.grid = [[]]
-        self.lamp_grid_size = [6, 6]
         # Initialize socket connection
-        self.socket(socket.AF_INET,
-                    socket.SOCK_DGRAM)
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     def __str__(self):
         result = ""
-        for row in self.grid:
+        for row in self.lamps:
             result += '['
             for cell in row:
                 result += str(cell) + ','
             result += ']\n'
         return result
 
-    def create_lamp(self, ip, port):
-        self.lamps.append(Lamp(len(self.lamps), ip, port))
+    def create_lamp(self, x, y, radius, ip, port):
+        self.lamps.append(Lamp(len(self.lamps) + 1, x, y, radius, ip, port))
 
-    # Creates the grid to determine which lampController is where
-    # [0,1]
-    # [2,3]
-    def create_grid(self):
-        if len(self.lamps) % 2 != 0:
-            raise Exception("Amount of lamps is uneven which currently is not supported")
+    def get_lamp(self, lamp_id):
+        for lamp in self.lamps:
+            if lamp.id == lamp_id:
+                return lamp
 
-        # Create 2d array based on grid
-        cells = 2
-        rows = len(self.lamps) // cells  # For now create rows that are 2 wide
-        self.grid = [[0] * cells * self.lamp_grid_size[0] for i in range(rows*self.lamp_grid_size[1])]
+    def update_by_coordinate(self, x, y, light):
+        for lamp in self.lamps:
+            if lamp.is_inside(x, y):
+                lamp.update_light(x, y, light)
+                return
+        raise OutOfBoundsError
+
+    def clear_lamps(self):
+        for lamp in self.lamps:
+            lamp.clear_all_lights()
 
     def set_cell(self, coordinates, value):
         self.grid[coordinates] = value

@@ -1,47 +1,57 @@
-import lampController
-
+from lampController import LampController, Light, Errors
+import requests
+import random
+import time
 
 def main():
-    field = lampController.LampController()
-    field.create_lamp('192.168.4.203', 4210)
-    field.create_lamp('192.168.4.204', 4210)
-    field.create_grid()
-    print(field)
+    field = LampController()
+    field.create_lamp(0, 0, 3, '127.0.0.1', 4400)
+    field.create_lamp(6, 0, 3, '192.168.4.204', 4210)
+    # for i in range(0, 50):
+    #     field.clear_lamps()
+    #     light = Light.Light(0)
+    #     light.set_with_array([0, random.randint(0, 255),
+    #                           0, random.randint(0, 255),
+    #                           0, random.randint(0, 255),
+    #                           0, random.randint(0, 255),
+    #                           0, random.randint(0, 255)])
+    #     try:
+    #         field.update_by_coordinate(random.randint(-3, 3), random.randint(-3, 3), light)
+    #     except Errors.OutOfBoundsError:
+    #         print("OUT OF BOUNDS")
+    #         pass
+    #     unity_update(field.get_lamp(1))
+    #     time.sleep(.1)
 
-    # lampController = library.Lamp(0, '192.168.4.204', 4210)
-    #
-    # # Print the entire data structure (usefull for debugging)
-    # # print(lampController)
-    #
-    # # Get a single light
-    # single_light = lampController.get_light(5)
-    # print(f'Single light:\n{single_light}')
-    #
-    # # Update the light
-    # single_light.red.dim = 16
-    # single_light.red.color = 55
-    #
-    # lampController.update_light(single_light)
-    # print(f'Updated light:\n{single_light}')
-    # lampController.clear_light(5)
-    # print(f'Cleared light:\n{lampController.get_light(5)}')
-    #
-    # # Get a single light
-    # single_light = lampController.get_light(5)
-    # # Update the light
-    # single_light.set_with_array([5,20,16,55,5,25,0,0,0,0])
-    # print(single_light)
-    #
-    # lampController.update_light(single_light)
-    #
-    # byte_array = lampController.build_byte_array()
-    #
-    # print(f'Byte array:\n{byte_array}')
-    #
-    # # You can uncomment these lines to test the exceptions
-    # # lampController.get_light(69).red.dim = 2
-    # # lampController.get_light(2).red.dim = 17
-    # # lampController.get_light(2).red.color = 256
+    light = Light.Light(0)
+    light.set_with_array([0, 255, 0, 0, 0, 0, 0, 0, 0, 0])
+    field.update_by_coordinate(0, 3, light)
+    field.update_by_coordinate(0, 2, light)
+    field.update_by_coordinate(0, 1, light)
+    field.update_by_coordinate(0, -1, light)
+    field.update_by_coordinate(0, -2, light)
+    field.update_by_coordinate(0, -3, light)
+
+    field.update_by_coordinate(1, 0, light)
+    field.update_by_coordinate(2, 0, light)
+    field.update_by_coordinate(3, 0, light)
+    field.update_by_coordinate(-1, 0, light)
+    field.update_by_coordinate(-2, 0, light)
+    field.update_by_coordinate(-3, 0, light)
+    unity_update(field.get_lamp(1))
+
+
+def unity_update(lamp):
+    url = 'http://localhost:4444'
+    json = {'lights': []}
+    for light in lamp:
+        json['lights'].append({'id': str(light.id), 'value': f'{light.red.color},{light.green.color},{light.blue.color},1)'})
+
+    print(json)
+
+    x = requests.post(url, json=json)
+
+    print(x.text)
 
 
 if __name__ == "__main__":

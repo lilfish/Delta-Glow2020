@@ -21,23 +21,12 @@ def find_marker(image):
     return cv2.minAreaRect(c)
 
 
-def distance_to_camera(knownWidth, focalLength, perWidth):
+def distance_to_camera(image,knownWidth, focalLength, perWidth):
     # compute and return the distance from the maker to the camera
     return (knownWidth * focalLength) / perWidth
 
 
-# initialize the known distance from the camera to the object, which
-# in this case is 30 cm
-KNOWN_DISTANCE = 30
-# initialize the known object width, which in this case, the piece of
-# paper is 35 cm wide
-KNOWN_WIDTH = 30
-# load the furst image that contains an object that is KNOWN TO BE 30cm
-# from our camera, then find the paper marker in the image, and initialize
-# the focal length
-image = cv2.imread("images/30cm.jpg")
-marker = find_marker(image)
-focalLength = (marker[1][0] * KNOWN_DISTANCE) / KNOWN_WIDTH
+
 
 
 
@@ -46,9 +35,13 @@ while(True):
     ret, frame = capture.read()
 
     # Our operations on the frame come here
-    image = cv2.imread(frame)
+    image = frame
+    marker = find_marker(frame)
+    KNOWN_DISTANCE = 30
+    KNOWN_WIDTH = 30
     marker = find_marker(image)
-    centimetre = distance_to_camera(KNOWN_WIDTH, focalLength, marker[1][0])
+    focalLength = (marker[1][0] * KNOWN_DISTANCE) / KNOWN_WIDTH
+    centimetre = distance_to_camera(frame,KNOWN_WIDTH, focalLength, marker[1][0])
     # draw a bounding box around the image and display it
     box = cv2.cv.BoxPoints(marker) if imutils.is_cv2() else cv2.boxPoints(marker)
     box = np.int0(box)

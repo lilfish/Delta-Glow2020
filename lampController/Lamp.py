@@ -63,6 +63,8 @@ class Lamp:
         byte_array = []
         for light in self.lights:
             byte_array = byte_array + light.build_byte_array()
+        for i in range(3):
+            byte_array += [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         return bytearray(byte_array)
 
     # Save a light

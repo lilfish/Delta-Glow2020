@@ -2,17 +2,25 @@ from .Led import Led
 
 
 class Light:
-    def __init__(self, id):
-        self.id = id
-        self.red = Led()
-        self.green = Led()
-        self.blue = Led()
-        self.warm_white = Led()
-        self.cold_white = Led()
+    def __init__(self, light_id, red=(0, 0), green=(0, 0), blue=(0, 0), warm_white=(0, 0), cold_white=(0, 0)):
+        """
+        :param light_id: Id of the light
+        :param red: (dim, color)
+        :param green: (dim, color)
+        :param blue: (dim, color)
+        :param warm_white: (dim, color)
+        :param cold_white: (dim, color)
+        """
+        self.light_id = light_id
+        self.red = Led(red)
+        self.green = Led(green)
+        self.blue = Led(blue)
+        self.warm_white = Led(warm_white)
+        self.cold_white = Led(cold_white)
 
     def __str__(self):
         result = str(
-            f'id: {self.id} \n' +
+            f'id: {self.light_id} \n' +
             f'red: {str(self.red)} \n' +
             f'green: {str(self.green)} \n' +
             f'blue: {str(self.blue)} \n' +

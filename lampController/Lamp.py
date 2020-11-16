@@ -15,7 +15,7 @@ lamp_grid = [[-1, -1, -1, 15, 0, 1, -1, -1, -1],
 
 
 class Lamp:
-    def __init__(self, lamp_id, x, y, radius, ip, port):
+    def __init__(self, lamp_id: int, x: int, y: int, radius: int, ip: str, port: str):
         self.id = lamp_id
         self.x = x
         self.y = y
@@ -38,32 +38,15 @@ class Lamp:
         return result
 
     # Find a single light
-    def get_light(self, light_id):
+    def get_light(self, light_id: int):
         light = self.lights[light_id]
         if not light:
             raise Exception("Light not found")
 
         return light
 
-    # Save a light
-    def update_light(self, x, y, new_light):
-        if type(new_light) is Light:
-            light_id = self.__convert_coordinates_to_light_id(x, y)
-            print(f"REPLACING {light_id}")
-            for i, light in enumerate(self.lights):
-                if light.id == light_id:
-                    new_light.id = light_id
-                    self.lights[light_id] = copy.copy(new_light)
-                    break
-            result = []
-            for light in self.lights:
-                result.append(light.id)
-            print(result)
-        else:
-            raise Exception("Argument must be of type Light")
-
     # Clear a single light
-    def clear_light(self, light_id):
+    def clear_light(self, light_id: int):
         self.lights[light_id] = Light(light_id)
 
     # Clear all lights
@@ -77,15 +60,32 @@ class Lamp:
             byte_array = byte_array + light.build_byte_array()
         return bytearray(byte_array)
 
+    # Save a light
+    def update_light(self, x: int, y: int, new_light: Light):
+        if type(new_light) is Light:
+            # Get the id of the light that should be updated
+            light_id = self.__convert_coordinates_to_light_id(x, y)
+            for i, light in enumerate(self.lights):
+                if light.id == light_id:
+                    new_light.id = light_id
+                    self.lights[light_id] = copy.copy(new_light)
+                    break
+            result = []
+            for light in self.lights:
+                result.append(light.id)
+            print(result)
+        else:
+            raise Exception("Argument must be of type Light")
+
     # Checks if the given coordinate is inside this lamps area.
-    def is_inside(self, x, y):
+    def is_inside(self, x: int, y: int) -> bool:
         if math.pow(self.x - x, 2) + math.pow(self.y - y, 2) <= math.pow(self.radius, 2):
             return True
         else:
             return False
 
     # Converts the x, y of the grid to a light id
-    def __convert_coordinates_to_light_id(self, x, y):
+    def __convert_coordinates_to_light_id(self, x: int, y: int) -> int:
         if x == 0 and y == 0:
             raise OutOfBoundsError
         x_in_circle = round(x - self.x)

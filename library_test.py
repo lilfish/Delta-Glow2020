@@ -1,7 +1,6 @@
 from lampController import LampController, Light, Errors
 import requests
-import random
-import time
+
 
 def main():
     field = LampController()
@@ -25,19 +24,19 @@ def main():
 
     light = Light.Light(0)
     light.set_with_array([0, 255, 0, 0, 0, 0, 0, 0, 0, 0])
-    field.update_by_coordinate(0, 3, light)
-    field.update_by_coordinate(0, 2, light)
-    field.update_by_coordinate(0, 1, light)
-    field.update_by_coordinate(0, -1, light)
-    field.update_by_coordinate(0, -2, light)
-    field.update_by_coordinate(0, -3, light)
+    field.update_by_coordinate(0, 3, Light(red=(0, 255)))
+    field.update_by_coordinate(0, 2, Light(red=(0, 255)))
+    field.update_by_coordinate(0, 1, Light(red=(0, 255)))
+    field.update_by_coordinate(0, -1, Light(red=(0, 255)))
+    field.update_by_coordinate(0, -2, Light(red=(0, 255)))
+    field.update_by_coordinate(0, -3, Light(red=(0, 255)))
 
-    field.update_by_coordinate(1, 0, light)
-    field.update_by_coordinate(2, 0, light)
-    field.update_by_coordinate(3, 0, light)
-    field.update_by_coordinate(-1, 0, light)
-    field.update_by_coordinate(-2, 0, light)
-    field.update_by_coordinate(-3, 0, light)
+    field.update_by_coordinate(1, 0, Light(red=(0, 255)))
+    field.update_by_coordinate(2, 0, Light(red=(0, 255)))
+    field.update_by_coordinate(3, 0, Light(red=(0, 255)))
+    field.update_by_coordinate(-1, 0, Light(red=(0, 255)))
+    field.update_by_coordinate(-2, 0, Light(red=(0, 255)))
+    field.update_by_coordinate(-3, 0, Light(red=(0, 255)))
     unity_update(field.get_lamp(1))
 
 
@@ -45,7 +44,8 @@ def unity_update(lamp):
     url = 'http://localhost:4444'
     json = {'lights': []}
     for light in lamp:
-        json['lights'].append({'id': str(light.id), 'value': f'{light.red.color},{light.green.color},{light.blue.color},1)'})
+        json['lights'].append({'id': str(light.id),
+                               'value': f'{light.red.color},{light.green.color},{light.blue.color},1)'})
 
     print(json)
 

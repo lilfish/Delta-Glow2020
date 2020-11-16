@@ -3,6 +3,7 @@ from .Lamp import Lamp
 from .Errors import OutOfBoundsError
 from .Light import Light
 
+
 # This class is responsible for 'clustering' the lamps and sending the data to the lamps
 class LampController:
     def __init__(self):
@@ -13,7 +14,7 @@ class LampController:
     def __str__(self):
         result = ""
         for lamp in self.lamps:
-            result += lamp
+            result += str(lamp)
         return result
 
     def create_lamp(self, x: int, y: int, radius: int, ip: str, port: str) -> Lamp:

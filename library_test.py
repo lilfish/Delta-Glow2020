@@ -5,7 +5,7 @@ import requests
 def main():
     field = LampController()
     field.create_lamp(0, 0, 3, '127.0.0.1', 4400)
-    field.create_lamp(6, 0, 3, '192.168.4.204', 4210)
+    # field.create_lamp(6, 0, 3, '192.168.4.204', 4210)
     # for i in range(0, 50):
     #     field.clear_lamps()
     #     light = Light.Light(0)
@@ -22,22 +22,27 @@ def main():
     #     unity_update(field.get_lamp(1))
     #     time.sleep(.1)
 
-    light = Light.Light(0)
+    light = Light(0)
     light.set_with_array([0, 255, 0, 0, 0, 0, 0, 0, 0, 0])
-    field.update_by_coordinate(0, 3, Light(red=(0, 255)))
-    field.update_by_coordinate(0, 2, Light(red=(0, 255)))
-    field.update_by_coordinate(0, 1, Light(red=(0, 255)))
-    field.update_by_coordinate(0, -1, Light(red=(0, 255)))
-    field.update_by_coordinate(0, -2, Light(red=(0, 255)))
-    field.update_by_coordinate(0, -3, Light(red=(0, 255)))
+    # field.update_by_coordinate(0, 3, Light(red=(0, 255)))
+    # field.update_by_coordinate(0, 2, Light(red=(0, 255)))
+    # field.update_by_coordinate(0, 1, Light(red=(0, 255)))
+    # field.update_by_coordinate(0, -1, Light(red=(0, 255)))
+    # field.update_by_coordinate(0, -2, Light(red=(0, 255)))
+    # field.update_by_coordinate(0, -3, Light(red=(0, 255)))
+    #
+    # field.update_by_coordinate(1, 0, Light(red=(0, 255)))
+    # field.update_by_coordinate(2, 0, Light(red=(0, 255)))
+    # field.update_by_coordinate(3, 0, Light(red=(0, 255)))
+    # field.update_by_coordinate(-1, 0, Light(red=(0, 255)))
+    # field.update_by_coordinate(-2, 0, Light(red=(0, 255)))
+    # field.update_by_coordinate(-3, 0, Light(red=(0, 255)))
 
-    field.update_by_coordinate(1, 0, Light(red=(0, 255)))
-    field.update_by_coordinate(2, 0, Light(red=(0, 255)))
-    field.update_by_coordinate(3, 0, Light(red=(0, 255)))
-    field.update_by_coordinate(-1, 0, Light(red=(0, 255)))
-    field.update_by_coordinate(-2, 0, Light(red=(0, 255)))
-    field.update_by_coordinate(-3, 0, Light(red=(0, 255)))
-    unity_update(field.get_lamp(1))
+    lamp = field.lamps[0]
+    lamp.set_all(light)
+
+    # unity_update(field.get_lamp(1))
+    print(field)
 
 
 def unity_update(lamp):

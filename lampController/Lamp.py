@@ -45,6 +45,11 @@ class Lamp:
 
         return light
 
+    def set_all(self, new_light: Light):
+        for i, light in enumerate(self.lights):
+            new_light.id = i
+            self.lights[i] = copy.copy(new_light)
+
     # Clear a single light
     def clear_light(self, light_id: int):
         self.lights[light_id] = Light(light_id)
@@ -73,7 +78,6 @@ class Lamp:
             result = []
             for light in self.lights:
                 result.append(light.id)
-            print(result)
         else:
             raise Exception("Argument must be of type Light")
 

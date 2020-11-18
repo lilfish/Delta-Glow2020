@@ -8,7 +8,7 @@ from imutils import contours
 import cv2
 
 capture = cv2.VideoCapture(0, cv2.CAP_DSHOW) #captureDevice = camera
-WidthParam = 3.5
+WidthParam = 24
 
 upperBodyCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_upperbody.xml')
 fullBodyCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fullbody.xml')
@@ -128,34 +128,35 @@ def showDistance():
                 # then construct the reference object
                 D = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
                 refObj = (box, (cX, cY), D / WidthParam)
-                #continue
+                continue
 
                 # draw the contours on the image
-                orig = image.copy()
-                cv2.drawContours(orig, [box.astype("int")], -1, (0, 255, 0), 2)
-                cv2.drawContours(orig, [refObj[0].astype("int")], -1, (0, 255, 0), 2)
-                # stack the reference coordinates and the object coordinates
-                # to include the object center
-                refCoords = np.vstack([refObj[0], refObj[1]])
-                objCoords = np.vstack([box, (cX, cY)])
+            orig = image.copy()
+            #box for reference and object
+            cv2.drawContours(orig, [box.astype("int")], -1, (0, 255, 0), 2)
+            cv2.drawContours(orig, [refObj[0].astype("int")], -1, (0, 255, 0), 2)
+            # stack the reference coordinates and the object coordinates
+            # to include the object center
+            refCoords = np.vstack([refObj[0], refObj[1]])
+            objCoords = np.vstack([box, (cX, cY)])
 
-                # loop over the original points
-                for ((xA, yA), (xB, yB), color) in zip(refCoords, objCoords, colors):
-                    # draw circles corresponding to the current points and
-                    # connect them with a line
-                    cv2.circle(orig, (int(xA), int(yA)), 5, color, -1)
-                    cv2.circle(orig, (int(xB), int(yB)), 5, color, -1)
-                    cv2.line(orig, (int(xA), int(yA)), (int(xB), int(yB)),
-                             color, 2)
-                    # compute the Euclidean distance between the coordinates,
-                    # and then convert the distance in pixels to distance in
-                    # units
-                    D = dist.euclidean((xA, yA), (xB, yB)) / refObj[2]
-                    (mX, mY) = midpoint((xA, yA), (xB, yB))
-                    cv2.putText(orig, "{:.1f}in".format(D), (int(mX), int(mY - 10)),
-                                cv2.FONT_HERSHEY_SIMPLEX, 0.55, color, 2)
-                    # show the output image
-                    cv2.imshow("Image", orig)
+            # loop over the original points
+            for ((xA, yA), (xB, yB), color) in zip(refCoords, objCoords, colors):
+                # draw circles corresponding to the current points and
+                # connect them with a line
+                cv2.circle(orig, (int(xA), int(yA)), 5, color, -1)
+                cv2.circle(orig, (int(xB), int(yB)), 5, color, -1)
+                #cv2.line(orig, (int(xA), int(yA)), (int(xB), int(yB)),
+                         #color, 2)
+                # compute the Euclidean distance between the coordinates,
+                # and then convert the distance in pixels to distance in
+                # units
+                D = dist.euclidean((xA, yA), (xB, yB)) / refObj[2]
+                (mX, mY) = midpoint((xA, yA), (xB, yB))
+                cv2.putText(orig, "{:.1f}CM".format(D), (int(mX), int(mY - 10)),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
+                # show the output image
+                cv2.imshow("Image", orig)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

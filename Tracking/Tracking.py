@@ -1,10 +1,8 @@
-# import the necessary packages
-from imutils import paths
 import numpy as np
 import imutils
-from scipy.spatial import distance as dist
 from imutils import perspective
 from imutils import contours
+from scipy.spatial import distance as dist
 import cv2
 
 capture = cv2.VideoCapture(0, cv2.CAP_DSHOW) #captureDevice = camera
